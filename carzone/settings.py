@@ -63,6 +63,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'pages.context_processors.team_pic'
             ],
         },
     },
@@ -76,8 +77,11 @@ WSGI_APPLICATION = 'carzone.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'carzone_db',#collectionun adi
+        'USER':'postgres',#postgres girdiyim ad defaultda yeni
+        'PASSWORD': 'riad123321',
+        'HOST':'localhost'
     }
 }
 
@@ -126,6 +130,14 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
 #env/Scripts/activate
 
+#PostgreSQL Account
+#superusername => postgres
+#password => riad123321
+#port => 5432
 
+#winpty yazirsan kodlarin bezileri oxunmasa eger git bash de kodun en basina winpty yaz

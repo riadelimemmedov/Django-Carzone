@@ -1,5 +1,6 @@
 from django.shortcuts import render
-
+from django.template import context
+from .models import *
 # Create your views here.
 
 #!homeView
@@ -8,7 +9,13 @@ def homeView(request):
 
 #!aboutView
 def aboutView(request):
-    return render(request,'pages/about.html')
+    teams = Teams.objects.all()
+
+    context = {
+        'teams':teams,
+    }
+
+    return render(request,'pages/about.html',context)
 
 #!servicesView
 def servicesView(request):
