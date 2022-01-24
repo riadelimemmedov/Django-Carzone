@@ -42,30 +42,35 @@
             </button>
             <div class="navbar-collapse collapse w-100" id="navbar">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link dropdown-toggle" href="{% url 'pages:homeView' %}" id="navbarDropdownMenuLink"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Datas
+
+                    <li class="nav-item"><!-- !Burda == yazmagmizdaki sebeb sayta girende defaultdaki linki bildirsin navbarda home olarag -->
+                        <a class="{% if request.path == '/' %} nav-link active {% else %} nav-link {% endif %} " href="{% url 'pages:homeView' %}">
+                            Home
                         </a>
                     </li>
+                    
                     <li class="nav-item">
-                        <a class="nav-link" href="cars.html">
+                        <a class="{% if 'cars' in request.path %} nav-link active {% else %} nav-link {% endif %}" href="{% url 'cars:allCarsView' %}">
                             Cars
                         </a>
                     </li>
+                    
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'pages:aboutView' %}">
+                        <a class="{% if 'about' in request.path %} nav-link active {% else %} nav-link {% endif %}" href="{% url 'pages:aboutView' %}">
                             About
                         </a>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'pages:servicesView' %}">
+                        <a class="{% if 'services' in request.path %} nav-link active {% else %} nav-link {% endif %}" href="{% url 'pages:servicesView' %}">
                             Services
                         </a>
                     </li>
+
                     <li class="nav-item dropdown">
-                        <a class="nav-link" href="{% url 'pages:contactView' %}">Contact</a>
+                        <a class="{% if 'contact' in request.path %} nav-link active {% else %} nav-link {% endif %}" href="{% url 'pages:contactView' %}">Contact</a>
                     </li>
+
                     <li class="nav-item dropdown m-hide">
                         <a href="#full-page-search" class="nav-link h-icon">
                             <i class="fa fa-search"></i>

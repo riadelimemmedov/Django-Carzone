@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-#!Teams
+#!Teams Model
 class Teams(models.Model):
     first_name = models.CharField(max_length=255,verbose_name='First Name')
     last_name = models.CharField(max_length=255,verbose_name='Last Name')
