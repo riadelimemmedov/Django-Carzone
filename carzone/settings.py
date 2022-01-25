@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pages.apps.PagesConfig',
-    'cars.apps.CarsConfig'
+    'cars.apps.CarsConfig',
+    
+    'ckeditor',
+    'multiselectfield'
 ]
 
 MIDDLEWARE = [
@@ -133,6 +136,15 @@ STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+
+CKEDITOR_CONFIGS = {#ckeditora code yazmag desteyi elave edeceyimiz ucun bunu bura yazdig yazmasag icaze vermir CKEDITOR
+    "default": {
+        "removePlugins": "stylesheetparser",
+        'allowedContent':True,
+        'width':'100%'#genislik form qeder olacag form deyisse ckeditorun olcusude deysecey
+    }
+}
 
 #env/Scripts/activate
 

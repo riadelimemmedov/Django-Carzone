@@ -1,5 +1,7 @@
 from pyexpat import features
 from django.db import models
+from ckeditor.fields import RichTextField
+from multiselectfield import MultiSelectField #MultiSelect bir kitabxanadir secmek ucun istifade olunur choicede 1 den data secende ManytoManydir ele bil amma hec bir dataya bagli deyil
 from datetime import datetime
 
 # Create your models here.
@@ -92,32 +94,36 @@ class Car(models.Model):
     ########################################################################
     
     car_title = models.CharField(max_length=255)
-    state = models.CharField(max_length=100,choices=state_choice)#olkeni bildirmek ucun
-    city = models.CharField(max_length=100)
-    color = models.CharField(max_length=100)
-    model = models.CharField(max_length=100)
+    state = models.CharField(max_length=255,choices=state_choice)#olkeni bildirmek ucun
+    city = models.CharField(max_length=255)
+    color = models.CharField(max_length=255)
+    model = models.CharField(max_length=255)
     year = models.IntegerField((('Year')),choices=year_choices)
-    condition = models.CharField(max_length=100)#condion burda masinin veziyyeti haqqinda melumat verir deyesen
+    condition = models.CharField(max_length=255)#condion burda masinin veziyyeti haqqinda melumat verir deyesen
     price = models.IntegerField()
-    description = models.TextField(max_length=500)
+    description = RichTextField()
     car_photo = models.ImageField(upload_to='carsimage/%Y/%m/%d')
     car_photo1 = models.ImageField(upload_to='carsimage/%Y/%m/%d',blank=True)
     car_photo2 = models.ImageField(upload_to='carsimage/%Y/%m/%d',blank=True)
     car_photo3 = models.ImageField(upload_to='carsimage/%Y/%m/%d',blank=True)
     car_photo4 = models.ImageField(upload_to='carsimage/%Y/%m/%d',blank=True)
-    features = models.CharField(max_length=100,choices=features_choices)
-    body_style = models.CharField(max_length=100)
-    engine = models.CharField(max_length=100)
-    transmission = models.CharField(max_length=100)
-    interior = models.CharField(max_length=100)
+    features = MultiSelectField(choices=features_choices)
+    body_style = models.CharField(max_length=255)
+    engine = models.CharField(max_length=255)
+    transmission = models.CharField(max_length=255)
+    interior = models.CharField(max_length=255)
     miles = models.IntegerField()
-    doors = models.CharField(max_length=10,choices=door_choices)
+    doors = models.CharField(max_length=255,choices=door_choices)
     passengers = models.IntegerField()
-    vin_no = models.CharField(max_length=100)#yeni masinin bar kodu
+    vin_no = models.CharField(max_length=255)#yeni masinin bar kodu
     mileage = models.IntegerField()
-    fuel_type = models.CharField(max_length=50)
-    no_of_owners = models.CharField(max_length=100)
+    fuel_type = models.CharField(max_length=255)
+    no_of_owners = models.CharField(max_length=255)
     is_featured = models.BooleanField(default=False)
     created_date = models.DateTimeField(default=datetime.now(),blank=True)
+    
+    
+    def __str__(self):
+        return str(self.car_title)
     
     
