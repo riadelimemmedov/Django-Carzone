@@ -1,11 +1,19 @@
 from django.shortcuts import render
-from django.template import context
+from cars.models import Car
 from .models import *
 # Create your views here.
 
 #!homeView
 def homeView(request):
-    return render(request,'pages/home.html')
+    all_cars_latest = Car.objects.all().order_by('-created_date')[:3]#yeni sondan 3 dene car gedir Car modelinden databaseden
+    featured_cars = Car.objects.all().order_by('-created_date').filter(is_featured=True)
+    
+    context = {
+        'all_cars_latest': all_cars_latest,
+        'featured_cars': featured_cars,
+    }
+    
+    return render(request,'pages/home.html',context)
 
 #!aboutView
 def aboutView(request):

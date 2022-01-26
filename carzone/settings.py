@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'cars.apps.CarsConfig',
     
     'ckeditor',
-    'multiselectfield'
+    'multiselectfield',
+    'django.contrib.humanize',#https://simpleisbetterthancomplex.com/tips/2016/05/09/django-tip-2-humanize.html => reqemlerde cevirmeler eleyir bu paket yeni humanize paketi
 ]
 
 MIDDLEWARE = [
