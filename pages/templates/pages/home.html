@@ -134,7 +134,7 @@
                         <div class="slick-slide-item">
                             <div class="car-box-3">
                                 <div class="car-thumbnail">
-                                    <a href="car-details.html" class="car-img">
+                                    <a href="{% url 'cars:detailCarsView' fc.id %}" class="car-img">
                                         <div class="tag-2">Featured</div>
                                         <div class="price-box">
                                             <span>{{fc.price|intcomma}}</span>
@@ -181,7 +181,7 @@
                                         <a href="{% url 'cars:detailCarsView' fc.id %}">{{fc.car_title}}</a>
                                     </h1>
                                     <div class="location">
-                                        <a href="car-details.html">
+                                        <a href="{% url 'cars:detailCarsView' fc.id %}">
                                             <i class="flaticon-pin"></i>{{fc.state}}. {{fc.city}}
                                         </a>
                                     </div>
@@ -225,7 +225,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="car-box">
                             <div class="car-thumbnail">
-                                <a href="car-details.html" class="car-img">
+                                <a href="{% url 'cars:detailCarsView' acl.id %}" class="car-img">
                                     <div class="tag">For Sale</div>
                                     <img class="d-block w-100" src="{{acl.car_photo.url}}" style="min-height: 262px !important;max-height: 262px !important;" alt="car">
                                     <div class="facilities-list clearfix">
@@ -285,7 +285,7 @@
                                     <a href="{% url 'cars:detailCarsView' acl.id %}">{{acl.car_title}}</a>
                                 </h1>
                                 <div class="location">
-                                    <a href="car-details.html">
+                                    <a href="{% url 'cars:detailCarsView' acl.id %}">
                                         <i class="flaticon-pin"></i>{{acl.state}}. {{acl.city}}
                                     </a>
                                 </div>
