@@ -1,0 +1,205 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Search Result Car{% endblock title %}
+
+{% block content %}
+
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NX5VQP"
+        height="0" width="0" style="display:none;visibility:hidden">
+    </iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- Banner start -->
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+            <h1>Search Results</h1>
+            <ul class="breadcrumbs">
+                <li><a href="{% url 'pages:homeView' %}">Home</a></li>
+                <li class="active">Search</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Banner end -->
+
+
+
+
+<div class="featured-car content-area">
+    <div class="container">
+        <!-- Main title -->
+        <div class="main-title">
+        {% if find_cars %}
+            <h1>Here's your <span>Cars</span></h1>
+        {% else %}
+            <div class="alert alert-danger border rounded">
+                <strong class="text-dark" style="font-weight: bold;">Not Found Cars</strong>
+            </div>
+        {% endif %}
+        </div>
+        
+        <div class="row" id="elaveolunacagmasinlar">
+            {% for car in find_cars %}
+                    <div class="col-lg-4 col-md-6">
+                    <div class="car-box">
+                        <div class="car-thumbnail">
+                            <a href="{% url 'cars:detailCarsView' car.id %}" class="car-img">
+                                <div class="tag">For Sale</div>
+                                <img class="d-block w-100" src="{{car.car_photo.url}}" style="min-height: 262px !important;max-height: 262px !important;" alt="car">
+                                <div class="facilities-list clearfix">
+                                    <ul>
+                                        <li>
+                                            <span><i class="flaticon-way"></i></span>{{car.miles|intcomma}} km
+                                        </li>
+                                        <li>
+                                            <span><i class="flaticon-calendar-1"></i></span>{{car.year}}
+                                        </li>
+                                        <li>
+                                            <span><i class="flaticon-manual-transmission"></i></span>{{car.transmission}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </a>
+                            <div class="carbox-overlap-wrapper">
+                                <div class="overlap-box">
+                                    <div class="overlap-btns-area">
+                                        <a class="overlap-btn" data-toggle="modal" data-target="#carOverviewModal">
+                                            <i class="fa fa-eye-slash"></i>
+                                        </a>
+                                        <div class="car-magnify-gallery">
+                                            <a href="{{car.car_photo.url}}" class="overlap-btn">
+                                                <i class="fa fa-expand"></i>
+                                                <img class="hidden" src="{{car.car_photo.url}}">
+                                            </a>
+
+                                            {% if car.car_photo1 %}
+                                                <a href="{{car.car_photo1.url}}" class="hidden">
+                                                    <img class="hidden" src="{{car.car_photo1.url}}">
+                                                </a>
+                                            {% endif %}
+                                            
+                                            {% if car.car_photo2 %}<!--Burda .url yazma if yazirsansa yoxsa gedib url yoxlayir ve xeta verir rowu yoxlayirsan sen burda dolu ve ya bos olmagini -->
+                                                <a href="{{car.car_photo2.url}}" class="hidden">
+                                                    <img class="hidden" src="{{car.car_photo2.url}}">
+                                                </a>
+                                            {% endif %}
+                                            
+                                            {% if car.car_photo3 %}
+                                                <a href="{{car.car_photo3.url}}" class="hidden">
+                                                    <img class="hidden" src="{{car.car_photo3.url}}">
+                                                </a>
+                                            {% endif %}
+
+                                            {% if car.car_photo4 %}
+                                                <a href="{{car.car_photo4.url}}" class="hidden">
+                                                    <img class="hidden" src="{{car.car_photo4.url}}">
+                                                </a>
+                                            {% endif %}
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="detail">
+                            <h1 class="title">
+                                <a href="{% url 'cars:detailCarsView' car.id %}">{{car.car_title}}</a>
+                            </h1>
+                            <div class="location">
+                                <a href="{% url 'cars:detailCarsView' car.id %}">
+                                    <i class="flaticon-pin"></i>{{car.state}}. {{car.city}}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="footer clearfix">
+                            <div class="pull-left ratings days">
+                                <p class="cartype">{{car.body_style}}</p>
+                            </div>
+                            <div class="pull-right">
+                                <p class="price">${{car.price|intcomma}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+        </div>
+    </div>
+</div>
+
+{% include "partials/footer.html" %}
+
+<div class="car-model-2">
+    <div class="modal fade" id="carOverviewModal" tabindex="-1" role="dialog" aria-labelledby="carOverviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title" id="carOverviewModalLabel">
+                        <h4>Explore Your Dream Car</h4>
+                        <h5><i class="flaticon-pin"></i>{{car.state}}. {{car.city}},</h5>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row modal-raw">
+                        <div class="col-lg-6 modal-left">
+                            <div class="item active">
+                                <img src="{{car.car_photo.url}}" style="width: 760px !important; height: 630px !important;" alt="carbest-car" class="img-fluid modalLabel-1">
+                                <div class="sobuz">
+                                    <div class="price-box" style="padding-bottom: 5px;">
+                                        <span class="del-2">${{car.price|intcomma}}</span>
+                                    </div>
+                                    <div class="ratings-2">
+                                        <a href="{% url 'cars:detailCarsView' car.id %}" class="btn btn-md btn-round btn-theme">{{car.body_style}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 modal-right">
+                            <div class="modal-right-content">
+                                <section>
+                                    <h3>Features</h3>
+                                    <div class="features">
+                                        <ul class="bullets">
+                                            <li>{{car.features}},</li><br>
+                                        </ul>
+                                    </div>
+                                </section>
+                                <section>
+                                    <h3>Overview</h3>
+                                    <ul class="bullets">
+                                        <li>Model</li>
+                                        <li>Year</li>
+                                        <li>Condition</li>
+                                        <li>Price</li>
+                                        <li>{{car.model}}</li>
+                                        <li>{{car.year}}</li>
+                                        <li>{{car.condition}}</li>
+                                        <li>${{car.price|intcomma}}</li>
+                                    </ul>
+                                </section>
+                                <div class="description">
+                                    <h3>Description</h3>
+                                    <p>{{car.description|truncatewords:30|safe}}</p>
+                                    <a href="{% url 'cars:detailCarsView' car.id %}" class="btn btn-md btn-round btn-theme">Show Detail</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+{% endfor %}
+
+{% include "partials/pagesearch.html" %}
+{% endblock content %}

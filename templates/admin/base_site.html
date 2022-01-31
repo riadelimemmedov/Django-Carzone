@@ -1,0 +1,18 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+
+<!-- !Burdaki branding djangoya mexsusdur admin paneline sekil vermek ucun istifade olunur => block branding seklinde -->
+{% block branding %}
+    <h1 id="head">
+        <a href="/admin">
+            <img src="{% static 'img/logos/black-logo.png' %}" alt="" class="brand_img" height="50" width="300">
+        </a>
+    </h1>
+{% endblock branding %}
+
+
+<!-- !Burdaki extrastyle ise admin panele css yazmag ucun django icinde defaultda gelen contentdir =>extrastyle -->
+{% block extrastyle %}
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+{% endblock extrastyle %}

@@ -1,0 +1,160 @@
+{% for fc in featured_cars %}
+<div class="slick-slide-item">
+    <div class="car-box-3">
+        <div class="car-thumbnail">
+            <a href="{% url 'cars:detailCarsView' fc.id %}" class="car-img">
+                <div class="tag-2">Featured</div>
+                <div class="price-box">
+                    <span>{{fc.price|intcomma}}</span>
+                </div>
+                <img class="d-block w-100" src="{{fc.car_photo.url}}" style="min-height: 262px !important;max-height: 262px !important;" alt="car"><!-- Main image car -->
+            </a>
+            <div class="carbox-overlap-wrapper">
+                <div class="overlap-box">
+                    <div class="overlap-btns-area">
+                        <div class="car-magnify-gallery">
+
+                            {% if fc.car_photo1 %}
+                                <a href="{{fc.car_photo1.url}}" class="overlap-btn">
+                                    <i class="fa fa-expand"></i>
+                                    <img class="hidden" src="{{fc.car_photo1.url}}">
+                                </a>
+                            {% endif %}
+                            
+                            {% if fc.car_photo2 %}
+                                <a href="{{fc.car_photo2.url}}" class="hidden">
+                                    <img class="hidden" src="{{fc.car_photo2.url}}">
+                                </a>
+                            {% endif %}
+
+                            {% if fc.car_photo3 %}
+                                <a href="{{fc.car_photo3.url}}" class="hidden">
+                                    <img class="hidden" src="{{fc.car_photo3.url}}"><!-- Djangoda sekilleri gostermek ucun sonuna url .url yazki gedib hemin url deki datani tapib getirsin -->
+                                </a>
+                            {% endif %}
+
+                            {% if fc.car_photo4 %}
+                                <a href="{{fc.car_photo4.url}}" class="hidden">
+                                    <img class="hidden" src="{{fc.car_photo4.url}}"><!-- Djangoda sekilleri gostermek ucun sonuna url .url yazki gedib hemin url deki datani tapib getirsin -->
+                                </a>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="detail">
+            <h1 class="title">
+                <a href="{% url 'cars:detailCarsView' fc.id %}">{{fc.car_title}}</a>
+            </h1>
+            <div class="location">
+                <a href="{% url 'cars:detailCarsView' fc.id %}">
+                    <i class="flaticon-pin"></i>{{fc.state}}. {{fc.city}}
+                </a>
+            </div>
+            <ul class="facilities-list clearfix">
+                <li>{{fc.fuel_type}}</li>
+                <li>{{fc.miles|intcomma}} km</li>
+                <li>{{fc.transmission}}</li>
+                <li>{{fc.body_style}}</li>
+                <li>{{fc.color}}</li>
+                <li>{{fc.year}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+
+
+
+
+    {% for acl in all_cars_latest %}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="car-box">
+                            <div class="car-thumbnail">
+                                <a href="{% url 'cars:detailCarsView' acl.id %}" class="car-img">
+                                    <div class="tag">For Sale</div>
+                                    <img class="d-block w-100" src="{{acl.car_photo.url}}" style="min-height: 262px !important;max-height: 262px !important;" alt="car">
+                                    <div class="facilities-list clearfix">
+                                        <ul>
+                                            <li>
+                                                <span><i class="flaticon-way"></i></span>{{acl.miles|intcomma}} km
+                                            </li>
+                                            <li>
+                                                <span><i class="flaticon-calendar-1"></i></span>{{acl.year}}
+                                            </li>
+                                            <li>
+                                                <span><i class="flaticon-manual-transmission"></i></span>{{acl.transmission}}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </a>
+                                <div class="carbox-overlap-wrapper">
+                                    <div class="overlap-box">
+                                        <div class="overlap-btns-area">
+                                            <div class="car-magnify-gallery">
+                                                <a href="{{acl.car_photo.url}} class="overlap-btn">
+                                                    <i class="fa fa-expand"></i>
+                                                    <img class="hidden" src="{{acl.car_photo.url}}">
+                                                </a>
+
+                                                {% if acl.car_photo1 %}
+                                                    <a href="{{acl.car_photo1.url}}" class="hidden">
+                                                        <img class="hidden" src="{{acl.car_photo1.url}}">
+                                                    </a>
+                                                {% endif %}
+                                                
+                                                {% if acl.car_photo2 %}<!--Burda .url yazma if yazirsansa yoxsa gedib url yoxlayir ve xeta verir rowu yoxlayirsan sen burda dolu ve ya bos olmagini -->
+                                                    <a href="{{acl.car_photo2.url}}" class="hidden">
+                                                        <img class="hidden" src="{{acl.car_photo2.url}}">
+                                                    </a>
+                                                {% endif %}
+                                                
+                                                {% if acl.car_photo3 %}
+                                                    <a href="{{acl.car_photo3.url}}" class="hidden">
+                                                        <img class="hidden" src="{{acl.car_photo3.url}}">
+                                                    </a>
+                                                {% endif %}
+
+                                                {% if acl.car_photo4 %}
+                                                    <a href="{{acl.car_photo4.url}}" class="hidden">
+                                                        <img class="hidden" src="{{acl.car_photo4.url}}">
+                                                    </a>
+                                                {% endif %}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <h1 class="title">
+                                    <a href="{% url 'cars:detailCarsView' acl.id %}">{{acl.car_title}}</a>
+                                </h1>
+                                <div class="location">
+                                    <a href="{% url 'cars:detailCarsView' acl.id %}">
+                                        <i class="flaticon-pin"></i>{{acl.state}}. {{acl.city}}
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="footer clearfix">
+                                <div class="pull-left ratings days">
+                                    <p class="cartype">{{acl.body_style}}</p>
+                                </div>
+                                <div class="pull-right">
+                                    <p class="price">${{acl.price|intcomma}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+
+
+
+
+
+

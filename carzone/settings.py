@@ -68,7 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'pages.context_processors.team_pic'
+                'pages.context_processors.team_pic',
             ],
         },
     },
@@ -131,6 +131,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static'),
+    os.path.join(BASE_DIR,'pages')#root tanimlaya bilersen bu formada js yerinde
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
@@ -155,3 +156,4 @@ CKEDITOR_CONFIGS = {#ckeditora code yazmag desteyi elave edeceyimiz ucun bunu bu
 #port => 5432
 
 #winpty yazirsan kodlarin bezileri oxunmasa eger git bash de kodun en basina winpty yaz
+#pgAdmin

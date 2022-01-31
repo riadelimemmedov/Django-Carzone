@@ -5,7 +5,12 @@
 {% block title %} Home {% endblock title %}
 
 {% block content %}
-    <!-- Banner start -->
+
+<div id="gorunmez">
+    <!-- ?Burda loading olacag class olarag css de yazilib o class elave olunacag Js ile  -->
+</div>
+    
+<!-- Banner start -->
     <div class="banner" id="banner">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner banner-slider-inner text-center">
@@ -37,64 +42,55 @@
                     </div>
                 </div>
             </div>
-            <!-- Search box 3 start -->
+            <!-- !Search box 3 start -->
             <div class="search-box-4 sb-8">
-                <form action="#" method="">
+                <form action = "" id="search_form"><!-- {% url 'cars:searchView' %} heleki yazma bunu js terefini hell etmek lazimdir cunki -->
+                    <!-- <div class="form-group">
+                        <input type="text" name="carname" placeholder="Search by name" class="form-control" id="car_name">
+                    </div> -->
+                    
+                    <!-- !xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
                     <div class="form-group">
-                        <input type="text" name="keyword" placeholder="Search by name" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <select class="form-control search-fields" name="select-brand">
-                            <option selected="true" disabled="disabled">Brand</option>
-                            <option>Audi</option>
-                            <option>BMW</option>
-                            <option>Honda</option>
-                            <option>Nissan</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <select class="form-control search-fields" name="select-make">
+                        <select class="form-control search-fields" name="select-make" id="select_model"><!-- onchange=selectModel() -->
                             <option selected="true" disabled="disabled">Model</option>
-                            <option>BMW</option>
-                            <option>Honda</option>
-                            <option>Lamborghini Huracán</option>
-                            <option>Sports Car</option>
+                            {% for model in model_search %}
+                                <option value="{{model}}">{{model}}</option>
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="form-group">
-                        <select class="form-control search-fields" name="select-location">
+                        <select class="form-control search-fields" name="select-location" id="select_location"><!-- onchange=selectLocation() -->
                             <option selected="true" disabled="disabled">Location</option>
-                            <option>United States</option>
-                            <option>United Kingdom</option>
+                            {% for city in city_search %}
+                                <option value="{{city}}">{{city}}</option>
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="form-group">
-                        <select class="form-control search-fields" name="select-year">
+                        <select class="form-control search-fields" name="select-year" id="select_year"><!-- onchange="selectedYear() -->
                             <option selected="true" disabled="disabled">Year</option>
-                            <option>2016</option>
-                            <option>2017</option>
-                            <option>2018</option>
-                            <option>2019</option>
+                            {% for year in year_search %}
+                                <option value="{{year}}">{{year}}</option>
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="form-group">
-                        <select class="form-control search-fields" name="select-type">
+                        <select class="form-control search-fields" name="select-type" id="select_body_style"><!--  onchange=selectBodyStyle() -->
                             <option selected="true" disabled="disabled">Select Type Of Car</option>
-                            <option>Sedan</option>
-                            <option>Sports</option>
-                            <option>Hatchback</option>
-                            <option>Pickup Truck</option>
-                            <option>SUV</option>
+                            {% for body_style in body_style_search %}
+                                <option value="{{body_style}}">{{body_style}}</option>
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="range-slider clearfix">
                         <label>Price</label>
-                        <div data-min="0" data-max="150000" data-min-name="min_price" data-max-name="max_price"
-                            data-unit="USD" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                        <div data-min="0" data-max="150000" data-min-name="min_price" data-max-name="max_price"  
+                            data-unit="USD" class="range-slider-ui ui-slider" aria-disabled="false" id="select_price"><!-- onmouseup="selectPriceCar() -->
+                        </div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-block button-theme btn-md">
+                        <button id="axtarisbutonu" class="btn btn-block button-theme btn-md">
                             <i class="fa fa-search"></i> Search
                         </button>
                     </div>
@@ -122,7 +118,7 @@
         <div class="container">
             <!-- Main title -->
             <div class="main-title">
-                <h1>Featured <span>Cars</span></h1>
+                <h1>Latest <span>Cars</span></h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
             <!-- Slick slider area start -->
@@ -130,6 +126,7 @@
                 <div class="row slick-carousel"
                     data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
                     
+                    <!-- ?Burani legv ele ajax yaz ay bletttt -->
                     {% for fc in featured_cars %}
                         <div class="slick-slide-item">
                             <div class="car-box-3">
@@ -145,7 +142,7 @@
                                         <div class="overlap-box">
                                             <div class="overlap-btns-area">
                                                 <div class="car-magnify-gallery">
-
+                        
                                                     {% if fc.car_photo1 %}
                                                         <a href="{{fc.car_photo1.url}}" class="overlap-btn">
                                                             <i class="fa fa-expand"></i>
@@ -158,19 +155,19 @@
                                                             <img class="hidden" src="{{fc.car_photo2.url}}">
                                                         </a>
                                                     {% endif %}
-
+                        
                                                     {% if fc.car_photo3 %}
                                                         <a href="{{fc.car_photo3.url}}" class="hidden">
                                                             <img class="hidden" src="{{fc.car_photo3.url}}"><!-- Djangoda sekilleri gostermek ucun sonuna url .url yazki gedib hemin url deki datani tapib getirsin -->
                                                         </a>
                                                     {% endif %}
-
+                        
                                                     {% if fc.car_photo4 %}
                                                         <a href="{{fc.car_photo4.url}}" class="hidden">
                                                             <img class="hidden" src="{{fc.car_photo4.url}}"><!-- Djangoda sekilleri gostermek ucun sonuna url .url yazki gedib hemin url deki datani tapib getirsin -->
                                                         </a>
                                                     {% endif %}
-
+                        
                                                 </div>
                                             </div>
                                         </div>
@@ -196,7 +193,8 @@
                                 </div>
                             </div>
                         </div>
-                    {% endfor %}
+                    {% endfor %}                    
+                    <!--?Ajax Hissesi sorgudan gelen masinlarin-->
 
                 </div>
                 <div class="slick-btn">
@@ -217,90 +215,11 @@
         <div class="container">
             <!-- Main title -->
             <div class="main-title">
-                <h1>Latest <span>Cars</span></h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h1>Query Results <span>Cars</span></h1>
             </div>
-            <div class="row">
-                {% for acl in all_cars_latest %}
-                    <div class="col-lg-4 col-md-6">
-                        <div class="car-box">
-                            <div class="car-thumbnail">
-                                <a href="{% url 'cars:detailCarsView' acl.id %}" class="car-img">
-                                    <div class="tag">For Sale</div>
-                                    <img class="d-block w-100" src="{{acl.car_photo.url}}" style="min-height: 262px !important;max-height: 262px !important;" alt="car">
-                                    <div class="facilities-list clearfix">
-                                        <ul>
-                                            <li>
-                                                <span><i class="flaticon-way"></i></span>{{acl.miles|intcomma}} km
-                                            </li>
-                                            <li>
-                                                <span><i class="flaticon-calendar-1"></i></span>{{acl.year}}
-                                            </li>
-                                            <li>
-                                                <span><i class="flaticon-manual-transmission"></i></span>{{acl.transmission}}
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </a>
-                                <div class="carbox-overlap-wrapper">
-                                    <div class="overlap-box">
-                                        <div class="overlap-btns-area">
-                                            <div class="car-magnify-gallery">
-                                                <a href="{{acl.car_photo.url}} class="overlap-btn">
-                                                    <i class="fa fa-expand"></i>
-                                                    <img class="hidden" src="{{acl.car_photo.url}}">
-                                                </a>
-
-                                                {% if acl.car_photo1 %}
-                                                    <a href="{{acl.car_photo1.url}}" class="hidden">
-                                                        <img class="hidden" src="{{acl.car_photo1.url}}">
-                                                    </a>
-                                                {% endif %}
-                                                
-                                                {% if acl.car_photo2 %}<!--Burda .url yazma if yazirsansa yoxsa gedib url yoxlayir ve xeta verir rowu yoxlayirsan sen burda dolu ve ya bos olmagini -->
-                                                    <a href="{{acl.car_photo2.url}}" class="hidden">
-                                                        <img class="hidden" src="{{acl.car_photo2.url}}">
-                                                    </a>
-                                                {% endif %}
-                                                
-                                                {% if acl.car_photo3 %}
-                                                    <a href="{{acl.car_photo3.url}}" class="hidden">
-                                                        <img class="hidden" src="{{acl.car_photo3.url}}">
-                                                    </a>
-                                                {% endif %}
-
-                                                {% if acl.car_photo4 %}
-                                                    <a href="{{acl.car_photo4.url}}" class="hidden">
-                                                        <img class="hidden" src="{{acl.car_photo4.url}}">
-                                                    </a>
-                                                {% endif %}
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="detail">
-                                <h1 class="title">
-                                    <a href="{% url 'cars:detailCarsView' acl.id %}">{{acl.car_title}}</a>
-                                </h1>
-                                <div class="location">
-                                    <a href="{% url 'cars:detailCarsView' acl.id %}">
-                                        <i class="flaticon-pin"></i>{{acl.state}}. {{acl.city}}
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="footer clearfix">
-                                <div class="pull-left ratings days">
-                                    <p class="cartype">{{acl.body_style}}</p>
-                                </div>
-                                <div class="pull-right">
-                                    <p class="price">${{acl.price|intcomma}}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
+            <div class="row" id="car_list_search_result">
+                <!--!?Result Of Search Car-->
+                <!-- ?End -->
             </div>
         </div>
     </div>
@@ -399,6 +318,9 @@
         </div>
     </div>
 </body>
+
+<script src="{% static 'js/jquery-2.2.0.min.js' %}"></script>
+<script src="{% static 'pages/searchcar.js' %}"></script><!-- defer yazmag istesen eger yeni eger birinci menim js faylim sonra jquery ve ya diger cdn ne varsa gelirse deferden istifade et den gecikmeler ucun istifade olunur jquery filan eger yuklenmeyibse bu formada istfiade olunur-->
 
 </html>
 
