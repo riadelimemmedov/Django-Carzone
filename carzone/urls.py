@@ -22,7 +22,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('pages.urls',namespace='pages')),
-    path('cars/',include('cars.urls',namespace='cars'))#burda diqqtli ol cars/ yazanda gedib sttatic fayllari qarisdirir
+    path('cars/',include('cars.urls',namespace='cars')),#burda diqqtli ol cars/ yazanda gedib sttatic fayllari qarisdirir
+    path('account/',include('account.urls',namespace='account'))
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
