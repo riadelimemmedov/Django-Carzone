@@ -16,12 +16,26 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-5">
                 <ul class="top-social-media pull-right">
-                    <li>
-                        <a href="{% url 'account:loginView' %}" class="sign-in"><i class="fa fa-sign-in"></i> Login</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'account:registerView' %}" class="sign-in"><i class="fa fa-user"></i> Register</a>
-                    </li>
+                    {% if request.user.is_authenticated %}<!-- eger istifadeci giris edibse yeni request.user.is_authenticated olubsa bura islesin-->
+                        <li>
+                            <a href="{% url 'account:dashboardView' %}" class="sign-in"><i class="fa fa-tachometer"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="javascript:{document.getElementById('logout').submit()}" class="sign-in"><i class="fa fa-sign-out"></i> Logout</a><!-- burda javascript: yazilmasi o demekdriki yeni bu url tiklananda javascript kodu islesin ve submit metodu yazilsin verilen id li attribute sonra onuda form icide testiqlemek lazimdir cunki formu submit edirik biz html de -->
+                            <form action="{% url 'account:logoutView' %}" method="POST" id="logout">
+                                {% csrf_token %}
+                                <input type="hidden">
+                            </form>
+
+                        </li>    
+                    {% else %}<!-- yox eger istifadeci giris etmeyibse bura islesin -->
+                        <li>
+                            <a href="{% url 'account:loginView' %}" class="sign-in"><i class="fa fa-sign-in"></i> Login</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'account:registerView' %}" class="sign-in"><i class="fa fa-registered"></i> Register</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

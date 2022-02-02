@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
+from logging import critical
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -158,3 +159,10 @@ CKEDITOR_CONFIGS = {#ckeditora code yazmag desteyi elave edeceyimiz ucun bunu bu
 
 #winpty yazirsan kodlarin bezileri oxunmasa eger git bash de kodun en basina winpty yaz
 #pgAdmin
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR:'danger',
+    messages.INFO:'info',
+    messages.SUCCESS:'success',#yeni SUCCESS cagrilanda gedib successs gotursun ve otursun message yerine ele bil key e gore valueni tapmaga benzeyir buda
+}

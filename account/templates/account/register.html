@@ -263,43 +263,44 @@
                         </a>
                     </div>
                     <h3>Create an account</h3>
+                    {% include "partials/messages.html" %}
                     <form action="{% url 'account:registerView' %}" method="POST">
                         {% csrf_token %}
-                        <div class="form-group form-box">
-                            <input type="text" name="firstname" class="input-text" placeholder="First Name" required>
-                            <i class="fa fa-user"></i>
-                        </div>
-                        <div class="form-group form-box">
-                            <input type="text" name="lastname" class="input-text" placeholder="Last Name" required>
-                            <i class="fa fa-user"></i>
-                        </div>
-                        <div class="form-group form-box">
-                            <input type="text" name="username" class="input-text" placeholder="Username" required>
-                            <i class="fa fa-user"></i>
-                        </div>
-                        <div class="form-group form-box">
-                            <input type="email" name="email" class="input-text" placeholder="Email Address" required>
-                            <i class="flaticon-mail"></i>
-                        </div>
-                        <div class="form-group form-box">
-                            <input type="password" name="password" class="input-text" placeholder="Password" required>
-                            <i class="flaticon-lock"></i>
-                        </div>
-                        <div class="form-group form-box">
-                            <input type="password" name="confirm_password" class="input-text" placeholder="Confirm Password" required>
-                            <i class="flaticon-lock"></i>
-                        </div>
-                        <div class="form-group mb-0 clearfix">
-                            <button type="submit" class="btn-md btn-theme btn-block">Register</button>
-                        </div>
-                        <div class="extra-login clearfix">
-                            <span>Or Login With</span>
-                        </div>
-                        <div class="clearfix"></div>
-                        <ul class="social-icons">
-							<li><a href="#" class="text-primary border rounded"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#" class="text-danger border rounded"><i class="fa fa-google-plus"></i></a></li>
-                        </ul>
+                            <div class="form-group form-box">
+                                <input type="text" name="firstname" class="input-text" placeholder="First Name" required>
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <div class="form-group form-box">
+                                <input type="text" name="lastname" class="input-text" placeholder="Last Name" required>
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <div class="form-group form-box">
+                                <input type="text" name="username" class="input-text" placeholder="Username" required>
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <div class="form-group form-box">
+                                <input type="email" name="email" class="input-text" placeholder="Email Address" required>
+                                <i class="flaticon-mail"></i>
+                            </div>
+                            <div class="form-group form-box">
+                                <input type="password" name="password" class="input-text" placeholder="Password" required>
+                                <i class="flaticon-lock"></i>
+                            </div>
+                            <div class="form-group form-box">
+                                <input type="password" name="confirm_password" class="input-text" placeholder="Confirm Password" required>
+                                <i class="flaticon-lock"></i>
+                            </div>
+                            <div class="form-group mb-0 clearfix">
+                                <button type="submit" class="btn-md btn-theme btn-block">Register</button><!-- eger form icinde buton yazirsansa bu butonun type mutleq submit olmalidir yoxsa POST request atilmaz view terefine -->
+                            </div>
+                            <div class="extra-login clearfix">
+                                <span>Or Login With</span>
+                            </div>
+                            <div class="clearfix"></div>
+                            <ul class="social-icons">
+                                <li><a href="#" class="text-primary border rounded"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#" class="text-danger border rounded"><i class="fa fa-google-plus"></i></a></li>
+                            </ul>
                     </form>
                     <p>Already a member? <a href="{% url 'account:loginView' %}" class="thembo text-dark font-weight-bold"> Login here</a></p>
                 </div>
