@@ -38,14 +38,28 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    
     'pages.apps.PagesConfig',
     'cars.apps.CarsConfig',
-    'account.apps.AccountConfig',
+    'accountuser.apps.AccountuserConfig',
+    'contacts.apps.ContactsConfig',
     
     'ckeditor',
     'multiselectfield',
     'django.contrib.humanize',#https://simpleisbetterthancomplex.com/tips/2016/05/09/django-tip-2-humanize.html => reqemlerde cevirmeler eleyir bu paket yeni humanize paketi
+
+    #AllAuth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    
+    #Providers
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
+    
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -141,6 +155,8 @@ STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
+#?LOGIN_REDIRECT_URL
+LOGIN_REDIRECT_URL = 'accountuser:dashboardView'
 
 CKEDITOR_CONFIGS = {#ckeditora code yazmag desteyi elave edeceyimiz ucun bunu bura yazdig yazmasag icaze vermir CKEDITOR
     "default": {
@@ -166,3 +182,12 @@ MESSAGE_TAGS = {
     messages.INFO:'info',
     messages.SUCCESS:'success',#yeni SUCCESS cagrilanda gedib successs gotursun ve otursun message yerine ele bil key e gore valueni tapmaga benzeyir buda
 }
+
+
+SITE_ID = 1
+
+#!Githuba yuklmek ucun 
+#1=>git status
+#2=>git add -A
+#3=>git commit -m "neyseyazbura"
+#4=>git push origin master =>githuba gonder

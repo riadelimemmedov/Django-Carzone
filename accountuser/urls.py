@@ -1,9 +1,9 @@
 from os import name
 from struct import pack
 from django.urls import path
-from .views import *
+from . views import *
 
-app_name = 'account'
+app_name = 'accountuser'
 
 urlpatterns = [
     path('login',loginView,name='loginView'),

@@ -2,9 +2,13 @@
 {% load static %}
 {% load humanize %}
 
-{% block title %} Register {% endblock title %}
+{% load socialaccount %}
+{% providers_media_js %}
+
+{% block title %} Login {% endblock title %}
 
 {% block content %}
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
 <style>
     /*------------------------------------------------------------------
@@ -230,8 +234,6 @@
     
 </style>
     
-</style>
-
 <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NX5VQP"
         height="0" width="0" style="display:none;visibility:hidden"></iframe>
@@ -242,67 +244,53 @@
 <div class="sub-banner overview-bgi">
     <div class="container breadcrumb-area">
         <div class="breadcrumb-areas">
-            <h1>Register  Account</h1>
+            <h1>Login To Your Account</h1>
             <ul class="breadcrumbs">
                 <li><a href="{% url 'pages:homeView' %}">Home</a></li>
-                <li class="active">Register</li>
+                <li class="active">Login</li>
             </ul>
         </div>
     </div>
 </div>
+<!-- Sub Banner end -->
 
 <!-- Contact section start -->
 <div class="contact-section">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 col-md-12">
+            <div class="col-lg-12">
                 <div class="form-section">
                     <div class="logo-2">
                         <a href="index.html">
                             <img src="{% static 'img/logos/black-logo.png' %}" alt="logo">
                         </a>
                     </div>
-                    <h3>Create an account</h3>
+                    <h3>Sign into your account</h3>
                     {% include "partials/messages.html" %}
-                    <form action="{% url 'account:registerView' %}" method="POST">
+                    <form action="{% url 'accountuser:loginView' %}" method="POST">
                         {% csrf_token %}
-                            <div class="form-group form-box">
-                                <input type="text" name="firstname" class="input-text" placeholder="First Name" required>
-                                <i class="fa fa-user"></i>
-                            </div>
-                            <div class="form-group form-box">
-                                <input type="text" name="lastname" class="input-text" placeholder="Last Name" required>
-                                <i class="fa fa-user"></i>
-                            </div>
-                            <div class="form-group form-box">
-                                <input type="text" name="username" class="input-text" placeholder="Username" required>
-                                <i class="fa fa-user"></i>
-                            </div>
-                            <div class="form-group form-box">
-                                <input type="email" name="email" class="input-text" placeholder="Email Address" required>
-                                <i class="flaticon-mail"></i>
-                            </div>
-                            <div class="form-group form-box">
-                                <input type="password" name="password" class="input-text" placeholder="Password" required>
-                                <i class="flaticon-lock"></i>
-                            </div>
-                            <div class="form-group form-box">
-                                <input type="password" name="confirm_password" class="input-text" placeholder="Confirm Password" required>
-                                <i class="flaticon-lock"></i>
-                            </div>
-                            <div class="form-group mb-0 clearfix">
-                                <button type="submit" class="btn-md btn-theme btn-block">Register</button><!-- eger form icinde buton yazirsansa bu butonun type mutleq submit olmalidir yoxsa POST request atilmaz view terefine -->
-                            </div>
-                            <div class="extra-login clearfix">
-                                <span>Or Login With</span>
-                            </div>
-                            <div class="clearfix"></div>
-                            <ul class="social-icons">
-                                <li><a href="#" class="text-primary border rounded"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#" class="text-danger border rounded"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
+                        <div class="form-group form-box">
+                            <input type="text" name="username" class="input-text" placeholder="Username" required>
+                            <i class="flaticon-mail"></i>
+                        </div>
+                        <div class="form-group form-box">
+                            <input type="password" name="password" class="input-text" placeholder="Password" required>
+                            <i class="flaticon-lock"></i>
+                        </div>
+                        <div class="form-group mb-0 clearfix">
+                            <button type="submit" class="btn-md btn-theme btn-block">Login</button><!-- Eger form icinde button yazirsansa bu butonun type mutleq submit olmlalidir eger POST request atirsansa -->
+                        </div>
+                        <div class="extra-login clearfix">
+                            <span>Or Login With</span>
+                        </div>
+                        <div class="clearfix"></div>
+                        <ul class="social-icons">
+                            <!-- method='oauth2' ile method='js_sdk' ile ferq burdadirki oauth2 de facebook gonderib acir faceeboku amma js_sdk ise inframe seklinde eyni seyfed acir ele -->
+							<li><a href="{% provider_login_url 'facebook' method='oauth2' %}" class="text-primary border rounded"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="{% provider_login_url 'google' method='oauth2' %}" class="text-danger border rounded"><i class="fa fa-google"></i></a></li>
+                        </ul>
                     </form>
-                    <p>Already a member? <a href="{% url 'account:loginView' %}" class="thembo text-dark font-weight-bold"> Login here</a></p>
+                    <p>Don't have an account? <a href="{% url 'accountuser:registerView' %}" class="thembo text-dark font-weight-bold"> Register here</a></p>
                 </div>
             </div>
         </div>
@@ -311,3 +299,5 @@
 <!-- Contact section end -->
 
 {% endblock content %}
+
+

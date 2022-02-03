@@ -11,29 +11,29 @@
                 <div class="list-inline">
                     <a href="tel:+55-4XX-634-7071"><i class="fa fa-phone"></i>+55-4XX-634-7071</a>
                     <a href="tel:info@themevessel.com"><i class="fa fa-envelope"></i>info@themevessel.com</a>
-                    <a href="tel:info@themevessel.com"><i class="fa fa-clock-o"></i>Mon - Sun: 8:00am - 6:00pm</a>
+                    <a href="tel:info@themevessel.com"><i class="fa fa-clock-o"></i>{% now " F-d-Y" %}</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 col-sm-5">
                 <ul class="top-social-media pull-right">
                     {% if request.user.is_authenticated %}<!-- eger istifadeci giris edibse yeni request.user.is_authenticated olubsa bura islesin-->
                         <li>
-                            <a href="{% url 'account:dashboardView' %}" class="sign-in"><i class="fa fa-tachometer"></i> Dashboard</a>
+                            <a href="{% url 'accountuser:dashboardView' %}" class="sign-in"><i class="fa fa-tachometer"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="javascript:{document.getElementById('logout').submit()}" class="sign-in"><i class="fa fa-sign-out"></i> Logout</a><!-- burda javascript: yazilmasi o demekdriki yeni bu url tiklananda javascript kodu islesin ve submit metodu yazilsin verilen id li attribute sonra onuda form icide testiqlemek lazimdir cunki formu submit edirik biz html de -->
-                            <form action="{% url 'account:logoutView' %}" method="POST" id="logout">
+                            <form action="{% url 'accountuser:logoutView' %}" method="POST" id="logout">
                                 {% csrf_token %}
-                                <input type="hidden">
+                                <input type="hidden"><!-- Bura yazilmasada olar tokenlari gizletmek ucun istifade olunur -->
                             </form>
 
                         </li>    
                     {% else %}<!-- yox eger istifadeci giris etmeyibse bura islesin -->
                         <li>
-                            <a href="{% url 'account:loginView' %}" class="sign-in"><i class="fa fa-sign-in"></i> Login</a>
+                            <a href="{% url 'accountuser:loginView' %}" class="sign-in"><i class="fa fa-sign-in"></i> Login</a>
                         </li>
                         <li>
-                            <a href="{% url 'account:registerView' %}" class="sign-in"><i class="fa fa-registered"></i> Register</a>
+                            <a href="{% url 'accountuser:registerView' %}" class="sign-in"><i class="fa fa-registered"></i> Register</a>
                         </li>
                     {% endif %}
                 </ul>
