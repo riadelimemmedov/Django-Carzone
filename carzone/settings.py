@@ -191,3 +191,12 @@ SITE_ID = 1
 #2=>git add -A
 #3=>git commit -m "neyseyazbura"
 #4=>git push origin master =>githuba gonder
+
+#?Send Email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'riadalimammedovriad@gmail.com'
+EMAIL_HOST_PASSWORD = 'riad18899!'
+EMAIL_USE_TLS = True
+

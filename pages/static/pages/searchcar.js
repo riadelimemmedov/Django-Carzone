@@ -139,11 +139,13 @@ formSearch.addEventListener('submit',(e)=>{
     e.preventDefault()
     console.log('Form Submit Oldu Masin Axtarisi Ucun Olan Form...')
 
+    car_list_search_result.innerHTML = ''
+
     if(selectedModelText=='' || selectedLocationText=='' || selectYearText=='' || selectBodyStyleText == ''){
         alert('Input True Value Please')
         location.href = window.location.href
     }
-    car_list_search_result.innerHTML = ''
+    
 
     const gorunmez = document.getElementById('gorunmez')
     gorunmez.innerHTML = '<div class="page_loader"></div>'
@@ -169,6 +171,11 @@ formSearch.addEventListener('submit',(e)=>{
             const cars_list = [...JSON.parse(response.cars_list)]
             //location.href = 'http://127.0.0.1:8000/cars/search'
             formSearch.reset()//reset funksiyasi sayesinde atilan requestden sonra form icinde butun deyerler temizlene bilir
+            selectedModelText = ''
+            selectedLocationText = ''
+            selectYearText = ''
+            selectBodyStyleText = ''
+            //buralari sifirlamasan yuxarida atadigin deyerler qalacag icinde
 
             cars_list.forEach(function(car){
                 let result_car_fields = car.fields
@@ -245,6 +252,3 @@ formSearch.addEventListener('submit',(e)=>{
 
 
 })
-
-
-let x_url = `${window.location.href}/ajaxdangelenmasinlar`

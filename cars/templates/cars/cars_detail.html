@@ -40,6 +40,7 @@
                 <div class="car-details-section">
                     <!-- Heading start -->
                     <div class="heading-car clearfix">
+                        {% include "partials/messages.html" %}<br>
                         <div class="pull-left">
                             <h3>{{single_car.car_title}}</h3>
                             <h6>
@@ -188,7 +189,7 @@
                                 <span>Model: </span>{{single_car.model}}
                             </li>
                             <li>
-                                <span>Year: </span>{{single_car.year}}
+                                <span>Year: </span>{{single_car.year}} 
                             </li>
                             <li>
                                 <span>Condition: </span>{{single_car.condition}}
@@ -232,47 +233,58 @@
                         </ul>
                     </div>
 
-                    <!-- Inquiry Modal -->
-                    <div class="modal fade" id="inquiryModal" role="dialog">
+                    <!-- !Inquiry Modal -->
+                    <div class="modal fade" id="inquiryModal" role="dialog" style="margin-top: 150px !important;">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="contact-dealer modal-header">
                                     <!-- <h5 class="modal-title" id="inquiryModalLabel">Contact Dealer</h5> -->
-                                    <img src="img/logos/logo-black-white.png">
-                                    <button type="button" class="close" data-dismiss="modal">
+                                    <center><img src="{% static 'img/logos/logo-black-white.png ' %}"></center>
+                                    <button type="button" class="close mx-auto my-auto" data-dismiss="modal">
                                         <span>&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="#">
+                                    <!-- !Contact Form -->
+                                    <form action="{% url 'contacts:inquiryView' %}" method="POST">
+                                        
+                                        {% csrf_token %}<!-- Burasi middleware token - dir -->
+
+                                        <!--?Burda ise istifadecnin id si ve masinin id si lazimdir viewe gondermeye formda amma backend terefi kimi gorunmesin bunlar frontda amma biz viewe gonderek -->
+                                        <!--?Bunun ucun cox sade => inputun type deyerini hidden edirik => A hidden field let web developers include data that cannot be seen or modified by users when a form is submitted. -->
+                                        
+                                        {% if request.user.is_authenticated %}<!-- Eger istifadeci giris edibse yeni request.user.is_authenticated olubsa yeni taniyibsa sayt bunu verilen tokena gore -->
+                                            <input type="hidden" name="user_id" value="{{request.user.id}}">
+                                        {% else %}<!-- Yox eger istifade giris etmeyibse default olarag inputun value deyerine 0 ver -->
+                                            <input type="hidden" name="user_id" value="0">
+                                        {% endif %}
+
+                                        <input type="hidden" name="car_id" value="{{single_car.id}}">
+
                                         <div class="form-group">
-                                            <label for="name" class="col-form-label">Hello, My Name is</label>
+                                            <label for="name" class="col-form-label">Hello, My Name is &nbsp; <strong>{% if request.user.username %} - {{request.user.username}} {% endif %}</strong></label>
                                             <div class="row">
                                                 <div class="col">
-                                                    <input type="text" name="first_name" class="form-control"
-                                                        placeholder="First Name" required>
+                                                    <input type="text" name="first_name" {% if request.user.is_authenticated %} value="{{request.user.first_name}}" {% endif %}
+                                                        class="form-control" placeholder="First Name" required>
                                                 </div>
                                                 <div class="col">
-                                                    <input type="text" name="last_name" class="form-control"
-                                                        placeholder="Last Name" required>
+                                                    <input type="text" name="last_name" {% if request.user.is_authenticated %} value="{{request.user.last_name}}" {% endif %}
+                                                        class="form-control" placeholder="Last Name" required>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <select class="form-control" id="sel1" name="customer_need">
                                                 <option value="I'm interested in this">I'm interested in this</option>
-                                                <option value="I'd like to know your best price for this">I'd like to
-                                                    know your best price for this</option>
-                                                <option value="I'd like to test drive this">I'd like to test drive this
-                                                </option>
-                                                <option value="I'd like a history report for this">I'd like a history
-                                                    report for this</option>
+                                                <option value="I'd like to know your best price for this">I'd like toknow your best price for this</option>
+                                                <option value="I'd like to test drive this">I'd like to test drive this</option>
+                                                <option value="I'd like a history report for this">I'd like a historyreport for this</option>
                                             </select>
                                         </div>
 
                                         <div class="form-group">
-                                            <input type="text" name="car_title" class="form-control"
-                                                value="LAMBORGHINI HURACÁN." readonly>
+                                            <input type="text" name="car_title" class="form-control text-capitalize" value="{{single_car.car_title|title}}" readonly><!-- inputun value deyeri inputun icinde tutdugu deyerdir ele -->
                                         </div>
 
                                         <div class="form-group">
@@ -294,8 +306,8 @@
                                                 <div class="col">
                                                     <label for="name" class="col-form-label">You can reach me by email
                                                         at</label>
-                                                    <input type="email" name="email" class="form-control"
-                                                        placeholder="Email Address" required>
+                                                    <input type="email" name="email" {% if request.user.is_authenticated %} value="{{request.user.email}}" {% endif %}
+                                                        class="form-control" placeholder="Email Address" required>
                                                 </div>
                                                 <div class="col">
                                                     <label for="phone" class="col-form-label">or by phone at</label>
@@ -311,7 +323,9 @@
                                                 placeholder="Enter your message here (optional)"></textarea>
                                         </div>
                                         <hr>
-                                        <input type="submit" value="Send" class="btn btn-block btn-danger">
+                                        <!-- <input type="submit" value="Send" class="btn btn-block btn-danger"> -->
+                                        <button type="submit" class="btn btn-danger btn-block">Send</button><!-- Eger form icinden melumat gonderirsense daha cox butondan istfiade olunur submit kimi amma bir seyi yadda saxlaki bu zaman butonun type mutleq sekilde submit olmlaidir yeni type="submit" -->
+
                                     </form>
                                 </div>
                             </div>
