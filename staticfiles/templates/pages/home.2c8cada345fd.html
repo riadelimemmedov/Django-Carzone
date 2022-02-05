@@ -1,0 +1,319 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block title %} Home {% endblock title %}
+
+{% block content %}
+
+<div id="gorunmez">
+    
+</div>
+    
+<!-- Banner start -->
+    <div class="banner" id="banner">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner banner-slider-inner text-center">
+                <div class="carousel-item banner-max-height active item-bg">
+                    <img class="d-block w-100 h-100" src="{% static 'img/car-1.jpg' %}" alt="banner">
+                    <div class="carousel-content container banner-info-2 bi-2 text-left">
+                        <h3>Wow Factor Standard</h3>
+                        <h5>Allow us to guide you through the innovative stress<br>
+                            free approach in finding your dream car.</h5>
+                        <a href="{% url 'pages:servicesView' %}" class="btn btn-lg btn-theme">Read more</a>
+                    </div>
+                </div>
+                <div class="carousel-item banner-max-height item-bg">
+                    <img class="d-block w-100 h-100" src="{% static 'img/car-2.jpg' %}" alt="banner">
+                    <div class="carousel-content container banner-info-2 bi-2 text-left">
+                        <h3>Explore Your Dream Car</h3>
+                        <h5>Allow us to guide you through the innovative stress<br>
+                            free approach in finding your dream car.</h5>
+                        <a href="{% url 'pages:servicesView' %}" class="btn btn-lg btn-theme">Read more</a>
+                    </div>
+                </div>
+                <div class="carousel-item banner-max-height item-bg">
+                    <img class="d-block w-100 h-100" src="{% static 'img/car-3.jpg' %}" alt="banner">
+                    <div class="carousel-content container banner-info-2 bi-2 text-left">
+                        <h3>We Are Wheel</h3>
+                        <h5>Allow us to guide you through the innovative stress<br>
+                            free approach in finding your dream car.</h5>
+                        <a href="{% url 'pages:servicesView' %}" class="btn btn-lg btn-theme">Read more</a>
+                    </div>
+                </div>
+            </div>
+            <!-- !Search box 3 start -->
+            <div class="search-box-4 sb-8">
+                <form action = "" id="search_form">
+                    <!-- !xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+                    <div class="form-group">
+                        <select class="form-control search-fields" name="select-make" id="select_model"><!-- onchange=selectModel() -->
+                            <option selected="true" disabled="disabled">Model</option>
+                            {% for model in model_search %}
+                                <option value="{{model}}">{{model}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control search-fields" name="select-location" id="select_location"><!-- onchange=selectLocation() -->
+                            <option selected="true" disabled="disabled">Location</option>
+                            {% for city in city_search %}
+                                <option value="{{city}}">{{city}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control search-fields" name="select-year" id="select_year"><!-- onchange="selectedYear() -->
+                            <option selected="true" disabled="disabled">Year</option>
+                            {% for year in year_search %}
+                                <option value="{{year}}">{{year}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control search-fields" name="select-type" id="select_body_style"><!--  onchange=selectBodyStyle() -->
+                            <option selected="true" disabled="disabled">Select Type Of Car</option>
+                            {% for body_style in body_style_search %}
+                                <option value="{{body_style}}">{{body_style}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="range-slider clearfix">
+                        <label>Price</label>
+                        <div data-min="0" data-max="150000" data-min-name="min_price" data-max-name="max_price"  
+                            data-unit="USD" class="range-slider-ui ui-slider" aria-disabled="false" id="select_price"><!-- onmouseup="selectPriceCar() -->
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="form-group">
+                        <button id="axtarisbutonu" class="btn btn-block button-theme btn-md">
+                            <i class="fa fa-search"></i> Search
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <!-- Search box 3 end -->
+            <a class="carousel-control-prev none-580" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="slider-mover-left" aria-hidden="true">
+                    <i class="fa fa-angle-left"></i>
+                </span>
+            </a>
+            <a class="carousel-control-next none-580" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="slider-mover-right" aria-hidden="true">
+                    <i class="fa fa-angle-right"></i>
+                </span>
+            </a>
+        </div>
+    </div>
+    <!-- Banner end -->
+
+    <!-- Search box 2 end -->
+
+    <!--! Featured car start -->
+    <div class="featured-car content-area-5">
+        <div class="container">
+            <!-- Main title -->
+            <div class="main-title">
+                <h1>Latest <span>Cars</span></h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+            <!-- Slick slider area start -->
+            <div class="slick-slider-area clearfix">
+                <div class="row slick-carousel"
+                    data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
+                    
+                    {% for fc in featured_cars %}
+                        <div class="slick-slide-item">
+                            <div class="car-box-3">
+                                <div class="car-thumbnail">
+                                    <a href="{% url 'cars:detailCarsView' fc.id %}" class="car-img">
+                                        <div class="tag-2">Featured</div>
+                                        <div class="price-box">
+                                            <span>{{fc.price|intcomma}}</span>
+                                        </div>
+                                        <img class="d-block w-100" src="{{fc.car_photo.url}}" style="min-height: 262px !important;max-height: 262px !important;" alt="car"><!-- Main image car -->
+                                    </a>
+                                    <div class="carbox-overlap-wrapper">
+                                        <div class="overlap-box">
+                                            <div class="overlap-btns-area">
+                                                <div class="car-magnify-gallery">
+                        
+                                                    {% if fc.car_photo1 %}
+                                                        <a href="{{fc.car_photo1.url}}" class="overlap-btn">
+                                                            <i class="fa fa-expand"></i>
+                                                            <img class="hidden" src="{{fc.car_photo1.url}}">
+                                                        </a>
+                                                    {% endif %}
+                                                    
+                                                    {% if fc.car_photo2 %}
+                                                        <a href="{{fc.car_photo2.url}}" class="hidden">
+                                                            <img class="hidden" src="{{fc.car_photo2.url}}">
+                                                        </a>
+                                                    {% endif %}
+                        
+                                                    {% if fc.car_photo3 %}
+                                                        <a href="{{fc.car_photo3.url}}" class="hidden">
+                                                            <img class="hidden" src="{{fc.car_photo3.url}}">
+                                                        </a>
+                                                    {% endif %}
+                        
+                                                    {% if fc.car_photo4 %}
+                                                        <a href="{{fc.car_photo4.url}}" class="hidden">
+                                                            <img class="hidden" src="{{fc.car_photo4.url}}">
+                                                        </a>
+                                                    {% endif %}
+                        
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="detail">
+                                    <h1 class="title">
+                                        <a href="{% url 'cars:detailCarsView' fc.id %}">{{fc.car_title}}</a>
+                                    </h1>
+                                    <div class="location">
+                                        <a href="{% url 'cars:detailCarsView' fc.id %}">
+                                            <i class="flaticon-pin"></i>{{fc.state}}. {{fc.city}}
+                                        </a>
+                                    </div>
+                                    <ul class="facilities-list clearfix">
+                                        <li>{{fc.fuel_type}}</li>
+                                        <li>{{fc.miles|intcomma}} km</li>
+                                        <li>{{fc.transmission}}</li>
+                                        <li>{{fc.body_style}}</li>
+                                        <li>{{fc.color}}</li>
+                                        <li>{{fc.year}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}                    
+
+                </div>
+                <div class="slick-btn">
+                    <div class="slick-prev slick-arrow-buton sab-4">
+                        <i class="fa fa-angle-left"></i>
+                    </div>
+                    <div class="slick-next slick-arrow-buton sab-3">
+                        <i class="fa fa-angle-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Featured car end -->
+
+    <!--! Rent car start -->
+    <div class="featured-car content-area">
+        <div class="container">
+            <!-- Main title -->
+            <div class="main-title">
+                <h1>Query Results <span>Cars</span></h1>
+            </div>
+            <div class="row" id="car_list_search_result">
+                <!--!?Result Of Search Car-->
+                <!-- ?End -->
+            </div>
+        </div>
+    </div>
+    <!-- Rent car end -->
+
+
+    {% include "partials/executiveteam.html" %}
+    <!-- Our team end -->
+
+    {% include "partials/doyouhavequestions.html" %}
+    <!-- Intro section end -->
+
+    <!-- Footer start -->
+
+    <!-- Footer end -->
+
+    <!-- !Full Page Search -->
+    {% include "partials/pagesearch.html" %}
+    <!-- Car Overview Modal -->
+    <div class="car-model-2">
+        <div class="modal fade" id="carOverviewModal" tabindex="-1" role="dialog"
+            aria-labelledby="carOverviewModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title" id="carOverviewModalLabel">
+                            <h4>Explore Your Dream Car</h4>
+                            <h5><i class="flaticon-pin"></i> 123 Kathal St. Tampa City,</h5>
+                        </div>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row modal-raw">
+                            <div class="col-lg-6 modal-left">
+                                <div class="item active">
+                                    <img src="img/car-13.jpg" alt="best-car" class="img-fluid modalLabel-1">
+                                    <img src="img/car-14.jpg" alt="best-car" class="img-fluid modalLabel-2">
+                                    <div class="sobuz">
+                                        <div class="price-box" style="padding-bottom: 5px;">
+                                            <span class="del-2">$1050.00</span>
+                                        </div>
+                                        <div class="">
+                                            <a href="car-details.html"
+                                                class="btn btn-md btn-round btn-theme">Convertible</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 modal-right">
+                                <div class="modal-right-content">
+                                    <section>
+                                        <h3>Features</h3>
+                                        <div class="features">
+                                            <ul class="bullets">
+                                                <li>Cruise Control</li>
+                                                <li>Airbags</li>
+                                                <li>Air Conditioning</li>
+                                                <li>Alarm System</li>
+                                                <li>Audio Interface</li>
+                                                <li>CDR Audio</li>
+                                                <li>Seat Heating</li>
+                                                <li>ParkAssist</li>
+                                            </ul>
+                                        </div>
+                                    </section>
+                                    <section>
+                                        <h3>Overview</h3>
+                                        <ul class="bullets">
+                                            <li>Model</li>
+                                            <li>Year</li>
+                                            <li>Condition</li>
+                                            <li>Price</li>
+                                            <li>Audi</li>
+                                            <li>2020</li>
+                                            <li>Brand New</li>
+                                            <li>$178,000</li>
+                                        </ul>
+                                    </section>
+                                    <div class="description">
+                                        <h3>Description</h3>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                            Lorem Ipsum has been the industry's standard.</p>
+                                        <a href="car-details.html" class="btn btn-md btn-round btn-theme">Show
+                                            Detail</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="{% static 'js/jquery-2.2.0.min.js' %}"></script>
+<script src="{% static 'pages/searchcar.js' %}"></script>
+
+</html>
+
+{% endblock content %}
