@@ -153,21 +153,21 @@ iterablenesne = iter(sayilar)
 # i = iter(nesne)
 # print(next(i))
 
-class Sayac():
-    def __init__(self,start,stop):
-        self.start = start
-        self.stop = stop
+# class Sayac():
+#     def __init__(self,start,stop):
+#         self.start = start
+#         self.stop = stop
         
-    def __iter__(self):
-        return self
+#     def __iter__(self):
+#         return self
     
-    def __next__(self):
-        if self.start <= self.stop:
-            x = self.start
-            self.start+=1
-            return x#her artan start deyerini ekrana yazmag ucun bu cur yoldan istifade etdim
-        else:
-            raise StopIteration
+#     def __next__(self):
+#         if self.start <= self.stop:
+#             x = self.start
+#             self.start+=1
+#             return x#her artan start deyerini ekrana yazmag ucun bu cur yoldan istifade etdim
+#         else:
+#             raise StopIteration
 
 # sayac_result = Sayac(2,5)
 # a = iter(sayac_result)

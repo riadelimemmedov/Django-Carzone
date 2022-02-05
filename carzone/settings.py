@@ -48,8 +48,8 @@ INSTALLED_APPS = [
     
     'ckeditor',
     'multiselectfield',
-    'django.contrib.humanize',#https://simpleisbetterthancomplex.com/tips/2016/05/09/django-tip-2-humanize.html => reqemlerde cevirmeler eleyir bu paket yeni humanize paketi
-
+    'django.contrib.humanize',
+    
     #AllAuth
     'allauth',
     'allauth.account',
@@ -98,17 +98,8 @@ WSGI_APPLICATION = 'carzone.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'carzone_db',#collectionun adi
-#         'USER':'postgres',#postgres girdiyim ad defaultda yeni
-#         'PASSWORD': 'riad123321',
-#         'HOST':'localhost'
-#     }
-# }
 
-DATABASES = {'default' : dj_database_url.config(default='postgres://postgres:riad123321@localhost/carzone_db')}
+DATABASES = {'default' : dj_database_url.config(default='postgres://postgres:password@localhost/schema')}
 
 
 # Password validation
@@ -186,8 +177,8 @@ SITE_ID = 1
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'riadalimammedovriad@gmail.com'
-EMAIL_HOST_PASSWORD = 'riad18899!'
+EMAIL_HOST_USER = 'adminemailadress or gmail'
+EMAIL_HOST_PASSWORD = 'mailpassword or gmail'
 EMAIL_USE_TLS = True
 
 #whitenoise settings

@@ -62,7 +62,7 @@ def contactView(request):
         send_mail(
             email_subject,
             message_body,
-            'riadalimammedovriad@gmail.com',
+            'admiemail',
             [admin_email],
             fail_silently=False,
         )
