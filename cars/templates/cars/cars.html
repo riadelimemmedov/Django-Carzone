@@ -117,11 +117,10 @@
                 <div class="pagination-box p-box-2 text-center">
                     <nav aria-label="Page navigation example">
 
-                        {% if cars.has_other_pages %}<!-- ?Eger basqa bir seyfe varsa gorunsun oxlar yoxdursa gorunmesin has_other_pages sayesinde -->
+                        {% if cars.has_other_pages %}
                             <ul class="pagination">
 
-                                <!--!Left yeni evvel sol teref yeni,burda geri oxuna basib geri getmek ucundur-->
-                                    {% if cars.has_previous %}<!-- ?Eger ozunden evvel page varsa yeni  cars.has_previous -->
+                                    {% if cars.has_previous %}
                                         <li class="page-item">
                                             <a class="page-link" href="?page={{cars.previous_page_number}}"><i class="fa fa-angle-left"></i></a>
                                         </li>
@@ -132,7 +131,6 @@
                                     {% endif %}
                                 <!--!xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
 
-                                <!--!Bu hissede saga ve ya ola hereket gedir oxnan mentiq var burda, yeni bu hissede reqemlerin ustune basib seyfeni cevirmekdi-->
                                 {% for i in cars.paginator.page_range %}
                                     {% if cars.number == i %}
                                         <li class="page-item">
@@ -145,7 +143,6 @@
                                     {% endif %}
                                 {% endfor %}
                                 
-                                <!--!Burda ise saga gedir yeni qabaga ireli,burda ireli oxuna basib ireli getmek ucundur-->
                                 {% if cars.has_next %}
                                     <li class="page-item">
                                         <a class="page-link" href="?page={{cars.next_page_number}}"><i class="fa fa-angle-right"></i>{{i}}</a>
@@ -155,14 +152,11 @@
                                         <a class="page-link"><i class="fa fa-angle-right"></i></a>
                                     </li>
                                 {% endif %}
-                                <!--!xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-->
                             </ul>
                         {% endif %}
-
                     </nav>
                 </div>
             </div>
-          
         </div>
     </div>
 </div>

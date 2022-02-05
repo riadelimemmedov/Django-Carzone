@@ -3,13 +3,11 @@
 {% load humanize %}
 
 {% block title %} {{single_car.car_title}} {% endblock title %}
-<!--Databaseden melumati cekenen sonra gelib burda title yerine cekilen datanin title vere bilesen -->
 
 {% block content %}
 
 <!-- !Google Tag Manager (noscript) -->
 <noscript>
-    <!--?Her ehtimal yazilir eger her hansi bir browserde js kodlarini oxunmur noscript icindekiler isleyir js kodlarini oxunmasi ucun ise script tagindan istifade olunur-->
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NX5VQP" height="0" width="0"
         style="display:none;visibility:hidden">
     </iframe>
@@ -93,7 +91,7 @@
                                     </a>
                                 </li>
                                 
-                                {% if single_car.car_photo1 %}<!--!Burda artig yeni if de yazanda yoxlayanda single_car.car_photo1.url yazmirig yeni url sozunu yazmirig cunki biz url i yoxlamirig databasedeki rowun dolub olub olmamagini yoxlayirig yeni =>.url yazilmir if icinde yoxsa xeta verecek -->
+                                {% if single_car.car_photo1 %}
                                     <li class="list-inline-item">
                                         <a id="carousel-selector-1" data-slide-to="1" data-target="#carDetailsSlider">
                                             <img src="{{single_car.car_photo1.url}}" class="img-fluid" alt="small-car">
@@ -324,7 +322,7 @@
                                         </div>
                                         <hr>
                                         <!-- <input type="submit" value="Send" class="btn btn-block btn-danger"> -->
-                                        <button type="submit" class="btn btn-danger btn-block">Send</button><!-- Eger form icinden melumat gonderirsense daha cox butondan istfiade olunur submit kimi amma bir seyi yadda saxlaki bu zaman butonun type mutleq sekilde submit olmlaidir yeni type="submit" -->
+                                        <button type="submit" class="btn btn-danger btn-block">Send</button>
 
                                     </form>
                                 </div>

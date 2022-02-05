@@ -10,7 +10,7 @@ class CarAdmin(admin.ModelAdmin):
     def thumbnail(self,object):
         #format_html icerisinde sekili return etki fielslarda istifade ede bilek yeni => return format_html
         ################################################
-        return format_html('<img src="{}" width="50px" style="border-radius:50%;">'.format(object.car_photo.url))#css de kodlar arasinda yeni parametler arasinda inline css yeni vergul qoyulmur yadda saxla qoyulmur
+        return format_html('<img src="{}" width="50px" style="border-radius:50%;">'.format(object.car_photo.url))
     thumbnail.short_description = 'Car Image'
     #################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
     

@@ -147,7 +147,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static'),
-    os.path.join(BASE_DIR,'pages')#root tanimlaya bilersen bu formada js yerinde
+    os.path.join(BASE_DIR,'pages')
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
@@ -168,29 +168,15 @@ CKEDITOR_CONFIGS = {#ckeditora code yazmag desteyi elave edeceyimiz ucun bunu bu
 
 #env/Scripts/activate
 
-#PostgreSQL Account
-#superusername => postgres
-#password => riad123321
-#port => 5432
-
-#winpty yazirsan kodlarin bezileri oxunmasa eger git bash de kodun en basina winpty yaz
-#pgAdmin
-
 from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.ERROR:'danger',
     messages.INFO:'info',
-    messages.SUCCESS:'success',#yeni SUCCESS cagrilanda gedib successs gotursun ve otursun message yerine ele bil key e gore valueni tapmaga benzeyir buda
+    messages.SUCCESS:'success',
 }
 
 
 SITE_ID = 1
-
-#!Githuba yuklmek ucun 
-#1=>git status
-#2=>git add -A
-#3=>git commit -m "neyseyazbura"
-#4=>git push origin master =>githuba gonder
 
 #?Send Email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

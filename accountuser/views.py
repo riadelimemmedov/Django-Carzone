@@ -1,10 +1,10 @@
-from django.shortcuts import render
-
-# Create your views here.
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from contacts.models import *
+
 
 # Create your views here.
 
@@ -15,7 +15,7 @@ def loginView(request):
         password = request.POST.get('password')
         
         user = authenticate(request,username=username,password=password)
-        if user is not None:#eger bele bir istifadeci varsa databasede
+        if user is not None:
             login(request,user)
             messages.add_message(request,messages.SUCCESS,'You Are Logged In')
             return redirect('accountuser:dashboardView')
@@ -44,7 +44,7 @@ def registerView(request):
                     return redirect(request.path)
                 else:
                     user = User.objects.create_user(first_name=firstname,last_name=lastname,email=email,username=username,password=password)#create_user => avtomatik olarag useri.save edir databaseye => Creates, saves and returns a User.
-                    login(request,user)#yeni register olan kimi login ol birbasa onsuzda create_user funksiyasi useri hem yaradir hemde save edir databaseye
+                    login(request,user)
                     messages.add_message(request,messages.SUCCESS,'You are now logged in')
                     return redirect('accountuser:dashboardView')
         else:
@@ -58,8 +58,16 @@ def logoutView(request):
         logout(request)
         #messages.add_message(request,messages.SUCCESS,'You Are Successfully Logout')
         return redirect('pages:homeView')
-    return redirect('pages:homeView')#mutleq sekilde return ile yazmalisan redirect funksiyasini yeni return birinci sonra redirect gelir yeni return redirect formasinda
+    return redirect('pages:homeView')
 
 #!dashboardView
+@login_required(login_url='accountuser:loginView')
 def dashboardView(request):
-    return render(request,'accountuser/dashboard.html')
+    user = request.user
+    user_dashboardview = Contact.objects.filter(user_id=user.id).order_by('-create_date_message_notification')
+    
+    context = {
+        'user_dashboardview':user_dashboardview,
+    }
+    
+    return render(request,'accountuser/dashboard.html',context)

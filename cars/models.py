@@ -1,7 +1,7 @@
 from pyexpat import features
 from django.db import models
 from ckeditor.fields import RichTextField
-from multiselectfield import MultiSelectField #MultiSelect bir kitabxanadir secmek ucun istifade olunur choicede 1 den data secende ManytoManydir ele bil amma hec bir dataya bagli deyil
+from multiselectfield import MultiSelectField 
 from datetime import datetime
 
 # Create your models here.
@@ -94,12 +94,12 @@ class Car(models.Model):
     ########################################################################
     
     car_title = models.CharField(max_length=255)
-    state = models.CharField(max_length=255,choices=state_choice)#olkeni bildirmek ucun
+    state = models.CharField(max_length=255,choices=state_choice)
     city = models.CharField(max_length=255)
     color = models.CharField(max_length=255)
     model = models.CharField(max_length=255)
     year = models.IntegerField((('Year')),choices=year_choices)
-    condition = models.CharField(max_length=255)#condion burda masinin veziyyeti haqqinda melumat verir deyesen
+    condition = models.CharField(max_length=255)
     price = models.IntegerField()
     description = RichTextField()
     car_photo = models.ImageField(upload_to='carsimage/%Y/%m/%d')
@@ -115,7 +115,7 @@ class Car(models.Model):
     miles = models.IntegerField()
     doors = models.CharField(max_length=255,choices=door_choices)
     passengers = models.IntegerField()
-    vin_no = models.CharField(max_length=255)#yeni masinin bar kodu
+    vin_no = models.CharField(max_length=255)
     mileage = models.IntegerField()
     fuel_type = models.CharField(max_length=255)
     no_of_owners = models.CharField(max_length=255)
