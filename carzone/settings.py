@@ -98,17 +98,17 @@ WSGI_APPLICATION = 'carzone.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'carzone_db',#collectionun adi
-        'USER':'postgres',#postgres girdiyim ad defaultda yeni
-        'PASSWORD': 'riad123321',
-        'HOST':'localhost'
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'carzone_db',#collectionun adi
+#         'USER':'postgres',#postgres girdiyim ad defaultda yeni
+#         'PASSWORD': 'riad123321',
+#         'HOST':'localhost'
+#     }
+# }
 
-#DATABASES = {'default' : dj_database_url.config(default='postgres://postgres:riad123321@localhost/carzone_db')}
+DATABASES = {'default' : dj_database_url.config(default='postgres://postgres:riad123321@localhost/carzone_db')}
 
 
 # Password validation
