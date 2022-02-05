@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 from logging import critical
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '0trx3q+ol53)ue*-s0ms&_6(tuql7bkjwew97m=tt#$8n^w4b('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -69,6 +70,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'carzone.urls'
@@ -96,15 +98,17 @@ WSGI_APPLICATION = 'carzone.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'carzone_db',#collectionun adi
-        'USER':'postgres',#postgres girdiyim ad defaultda yeni
-        'PASSWORD': 'riad123321',
-        'HOST':'localhost'
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'carzone_db',#collectionun adi
+#         'USER':'postgres',#postgres girdiyim ad defaultda yeni
+#         'PASSWORD': 'riad123321',
+#         'HOST':'localhost'
+#     }
+# }
+
+DATABASES = {'default' : dj_database_url.config(default='postgres://postgres:riad123321@localhost/carzone_db')}
 
 
 # Password validation
@@ -186,3 +190,5 @@ EMAIL_HOST_USER = 'riadalimammedovriad@gmail.com'
 EMAIL_HOST_PASSWORD = 'riad18899!'
 EMAIL_USE_TLS = True
 
+#whitenoise settings
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
