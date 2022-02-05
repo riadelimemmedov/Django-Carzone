@@ -27,7 +27,7 @@ SECRET_KEY = '0trx3q+ol53)ue*-s0ms&_6(tuql7bkjwew97m=tt#$8n^w4b('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://radiant-meadow-70123.herokuapp.com/','car1zoneapp.co','www.car1zoneapp.co']
+ALLOWED_HOSTS = ['radiant-meadow-70123.herokuapp.com','car1zoneapp.co','www.car1zoneapp.co']
 
 
 # Application definition
